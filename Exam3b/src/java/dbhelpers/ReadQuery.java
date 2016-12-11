@@ -1,4 +1,4 @@
-package dbHelpers;
+package dbhelpers;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,7 +20,7 @@ import model.Customers;
     public ReadQuery (){
         
         Properties props = new Properties();
-        InputStream instr = getClass().getResourceAsStream("dbConn.properties");
+        InputStream instr = getClass().getResourceAsStream("dbconn.properties");
         try {
             props.load(instr);
         } catch (IOException ex) {

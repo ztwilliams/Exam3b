@@ -1,6 +1,6 @@
 package controller;
 
-import dbhelpers.ReadQuery;
+import dbhelpers.ReadQueryAdmin;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -14,8 +14,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Zach Williams
  */
-@WebServlet(name = "read", urlPatterns = {"/read"})
-public class read extends HttpServlet {
+@WebServlet(name = "readadmin", urlPatterns = {"/readadmin"})
+public class readadmin extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -71,7 +71,7 @@ public class read extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-            ReadQuery rq = new ReadQuery(); 
+            ReadQueryAdmin rq = new ReadQueryAdmin(); 
             
             rq.doRead();
             String table = rq.getHTMLTable();
