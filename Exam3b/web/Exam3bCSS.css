@@ -72,7 +72,7 @@ form{
 }
 
 
-input[readonly]{background-color: gray;}
+input[readonly]{background-color:whitesmoke;}
 
 
 
@@ -84,15 +84,15 @@ input[readonly]{background-color: gray;}
 
 
 
-body{background-color:LightGray;}
+body{background-color:whitesmoke;}
 
 .wrap {text-align:center; width:90%; margin:0 auto; border:2px solid black; margin-top:25px;}
 
-.header {background-color:Gray; text-align:left; padding:25px;}
-.headerimg{background-color:Gray; float:left; width:160px;}
+.header {background-color:gray; text-align:left; padding:25px;}
+.headerimg{background-color:white; float:left; width:160px;}
 .headertext{float:left; height:105px; padding-top:50px; padding-left:75px;}
 
-.footer {background-color:Gray; text-align:left; padding:25px;}	
+.footer {background-color: gray; text-align:left; padding:25px;}	
 
 .main {background-color:darkkhaki; text-align:left; padding:25px;}
 

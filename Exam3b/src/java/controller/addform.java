@@ -1,6 +1,10 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package controller;
 
-import dbhelpers.ReadQueryAdmin;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -14,8 +18,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Zach Williams
  */
-@WebServlet(name = "readadmin", urlPatterns = {"/readadmin"})
-public class readadmin extends HttpServlet {
+@WebServlet(name = "addform", urlPatterns = {"/add"})
+public class addform extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,10 +38,10 @@ public class readadmin extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet read</title>");            
+            out.println("<title>Servlet addform</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet read at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet addform at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -56,7 +60,7 @@ public class readadmin extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-            doPost(request, response);
+             doPost(request, response); 
     }
 
     /**
@@ -71,20 +75,10 @@ public class readadmin extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-            ReadQueryAdmin rq = new ReadQueryAdmin(); 
-            
-            rq.doRead();
-            String table = rq.getHTMLTable();
-            
-            request.setAttribute("table", table); 
-            String url = "/readadmin.jsp";
+            String url = "/add.jsp";
             
             RequestDispatcher dispatcher = request.getRequestDispatcher(url);
-            dispatcher.forward(request, response);
-        
-        
-        
-        
+            dispatcher.forward (request, response);
     }
 
     /**

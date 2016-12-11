@@ -1,6 +1,6 @@
 package controller;
 
-import dbhelpers.ReadQueryAdmin;
+import dbhelpers.AddQuery;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -9,13 +9,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Customers;
 
 /**
  *
  * @author Zach Williams
  */
-@WebServlet(name = "readadmin", urlPatterns = {"/readadmin"})
-public class readadmin extends HttpServlet {
+@WebServlet(name = "addservlet", urlPatterns = {"/addCustomer"})
+public class addservlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,10 +35,10 @@ public class readadmin extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet read</title>");            
+            out.println("<title>Servlet addservlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet read at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet addservlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -71,20 +72,41 @@ public class readadmin extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-            ReadQueryAdmin rq = new ReadQueryAdmin(); 
+            //get the data
+            String firstName = request.getParameter("firstName"); 
+            String lastName = request.getParameter("lastName");
+            String addr1 = request.getParameter("addr1");
+            String addr2 = request.getParameter("addr2");
+            String city = request.getParameter("city");
+            String state = request.getParameter("state");
+            String zip = request.getParameter("zip");
+            String emailAddr = request.getParameter("emailAddr");
             
-            rq.doRead();
-            String table = rq.getHTMLTable();
             
-            request.setAttribute("table", table); 
-            String url = "/readadmin.jsp";
+            //set up a state object
+            Customers customer = new Customers();
+            customer.setFirstName(firstName);
+            customer.setLastName(lastName);
+            customer.setAddr1(addr1);
+            customer.setAddr2(addr2); 
+            customer.setCity(city);
+            customer.setState(state);
+            customer.setZip(zip);
+            customer.setEmailAddr(emailAddr);
+            
+            
+            //set up an addQuery object
+            AddQuery aq = new AddQuery();
+            
+            
+            //pass the state to addQuery to add to the database
+            aq.doAdd(customer);
+            
+            //pass execution control to the ReadServlet
+            String url = "/readadmin";
             
             RequestDispatcher dispatcher = request.getRequestDispatcher(url);
-            dispatcher.forward(request, response);
-        
-        
-        
-        
+            dispatcher.forward (request, response);
     }
 
     /**
