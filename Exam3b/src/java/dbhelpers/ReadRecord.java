@@ -23,7 +23,7 @@ public class ReadRecord {
     public ReadRecord (int custID) {
 
      Properties props = new Properties();
-        InputStream instr = getClass().getResourceAsStream("dbconn.properties");
+        InputStream instr = getClass().getResourceAsStream("dbConn.properties");
         try {
             props.load(instr);
         } catch (IOException ex) {

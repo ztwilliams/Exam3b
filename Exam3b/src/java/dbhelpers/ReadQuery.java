@@ -20,7 +20,7 @@ import model.Customers;
     public ReadQuery (){
         
         Properties props = new Properties();
-        InputStream instr = getClass().getResourceAsStream("dbconn.properties");
+        InputStream instr = getClass().getResourceAsStream("dbConn.properties");
         try {
             props.load(instr);
         } catch (IOException ex) {

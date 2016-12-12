@@ -103,7 +103,7 @@ public class addservlet extends HttpServlet {
             aq.doAdd(customer);
             
             //pass execution control to the ReadServlet
-            String url = "/readadmin";
+            String url = "/read";
             
             RequestDispatcher dispatcher = request.getRequestDispatcher(url);
             dispatcher.forward (request, response);
