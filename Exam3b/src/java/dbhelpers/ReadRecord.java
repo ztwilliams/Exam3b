@@ -1,4 +1,4 @@
-package dbHelpers;
+package dbhelpers;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,7 +23,7 @@ public class ReadRecord {
     public ReadRecord (int custID) {
 
      Properties props = new Properties();
-        InputStream instr = getClass().getResourceAsStream("dbConn.properties");
+        InputStream instr = getClass().getResourceAsStream("dbconn.properties");
         try {
             props.load(instr);
         } catch (IOException ex) {

@@ -1,23 +1,22 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+package controller;
 
+import dbhelpers.ReadRecord;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Customers;
 
 /**
  *
  * @author Zach Williams
  */
-@WebServlet(urlPatterns = {"/searchadmin"})
-public class SearchServletAdmin extends HttpServlet {
+@WebServlet(name = "UpdateFormServlet", urlPatterns = {"/update"})
+public class UpdateFormServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,10 +35,10 @@ public class SearchServletAdmin extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SearchServletAdmin</title>");            
+            out.println("<title>Servlet UpdateFormServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet SearchServletAdmin at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet UpdateFormServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -57,7 +56,8 @@ public class SearchServletAdmin extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+            doPost (request, response);
     }
 
     /**
@@ -71,7 +71,21 @@ public class SearchServletAdmin extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+       
+             //get the stateID
+            int custID = Integer.parseInt(request.getParameter("custID")); 
+            //create a ReadRecord class
+            ReadRecord rr = new ReadRecord(custID); 
+            //use ReadRecord to get the friend data
+            rr.doRead();
+            Customers customer = rr.getCustomer();
+            //pass state and control to updateForm.jsp
+            request.setAttribute("customer", customer); 
+            
+            String url = "/update.jsp";
+            
+            RequestDispatcher dispatcher = request.getRequestDispatcher(url);
+            dispatcher.forward (request, response);
     }
 
     /**
