@@ -18,7 +18,7 @@
 
             
             <div class="main" >
-                <h1>Administrative Page</h1>
+                <h1>Administrative Page<br><br>Choose an Option Above</h1>
 
             </div>
 

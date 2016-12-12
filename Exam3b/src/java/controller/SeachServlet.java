@@ -1,5 +1,6 @@
 package controller;
 
+import dbhelpers.SearchQuery;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -13,8 +14,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Zach Williams
  */
-@WebServlet(name = "addform", urlPatterns = {"/add"})
-public class addform extends HttpServlet {
+@WebServlet(name = "SeachServlet", urlPatterns = {"/search"})
+public class SeachServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,10 +34,10 @@ public class addform extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet addform</title>");            
+            out.println("<title>Servlet SeachServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet addform at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet SeachServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -54,8 +55,8 @@ public class addform extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-             doPost(request, response); 
+            
+            doPost(request, response);
     }
 
     /**
@@ -70,7 +71,16 @@ public class addform extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-            String url = "/add.jsp";
+            //get the text to be searched
+            String firstName = request.getParameter("searchVal");
+            //create a SearchQuery helper object
+            SearchQuery sq = new SearchQuery();
+            //get the HTML table from the SearchQuery object
+            sq.doSearch(firstName);
+            String table = sq.getHTMLTable(); 
+            //pass execution control to read.jsp along with the table
+            request.setAttribute("table", table);
+            String url = "/read.jsp";
             
             RequestDispatcher dispatcher = request.getRequestDispatcher(url);
             dispatcher.forward (request, response);
