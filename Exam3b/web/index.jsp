@@ -18,7 +18,7 @@
 
             
             <div class="main" >
-                <h1>States Database</h1>
+                <h1>Customer Database</h1>
 
             </div>
 
